@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title th:text="${vuelo.codigo}">Detalle del Vuelo</title>
+  <link rel="stylesheet" href="/detalle.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+<div class="flight-detail">
+  <img th:src="@{${vuelo.imagen}}" alt="Imagen de la aerolínea">
+  <div class="flight-detail-info">
+    <div class="header-container">
+      <h1 th:text="${vuelo.codigo}">Código de vuelo</h1>
+      <p class="route-text">
+        <span th:text="${vuelo.origen}">Origen</span>
+        <i class="fas fa-arrow-right"></i>
+        <span th:text="${vuelo.destino}">Destino</span>
+      </p>
+    </div>
+
+    <p>
+      <strong>Aerolínea: </strong>
+      <i class="fas fa-plane"></i>
+      <span th:text="${vuelo.aerolinea}">Nombre aerolínea</span>
+    </p>
+
+    <p>
+      <strong>Salida: </strong>
+      <span th:text="${vuelo.fecha_salida} + ' ' + ${vuelo.hora_salida}">Fecha y hora</span>
+    </p>
+
+    <p>
+      <strong>Duración: </strong>
+      <span th:text="${vuelo.duracion} + ' minutos'">Duración</span>
+    </p>
+  </div>
+</div>
+</body>
+</html>

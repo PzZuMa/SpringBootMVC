@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Listado de Vuelos</title>
+  <link rel="stylesheet" href="/listado.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+<h1>Vuelos Disponibles</h1>
+
+<div class="vuelo-container">
+  <div th:each="vuelo : ${vuelos}" class="vuelo-card" th:data-vuelo-id="${vuelo._id}">
+    <img th:src="@{${vuelo.imagen}}" alt="Logo aerolínea">
+    <div class="vuelo-info">
+      <h2 th:text="${vuelo.codigo}">Código vuelo</h2>
+      <p class="ruta">
+        <i class="fas fa-plane-departure"></i>
+        <span th:text="${vuelo.origen}">Origen</span>
+        <i class="fas fa-arrow-right"></i>
+        <i class="fas fa-plane-arrival"></i>
+        <span th:text="${vuelo.destino}">Destino</span>
+      </p>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const vueloCards = document.querySelectorAll('.vuelo-card');
+    vueloCards.forEach(card => {
+      card.addEventListener('click', function() {
+        const vueloID = this.getAttribute('data-vuelo-id');
+        window.location.href = '/web/vuelo/' + vueloID;
+      });
+    });
+  });
+</script>
+</body>
+</html>

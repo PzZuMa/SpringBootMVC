@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title th:text="${hotel.nombre}">Detalle del Hotel</title>
+  <link rel="stylesheet" href="/detalle.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+<div class="hotel-detail">
+  <img th:src="@{${hotel.imagen}}" alt="Imagen del Hotel">
+  <div class="hotel-detail-info">
+    <div class="header-container">
+      <h1 th:text="${hotel.nombre}">Nombre del Hotel</h1>
+      <p class="city-text" th:text="${hotel.ciudad}">Ciudad</p>
+    </div>
+
+    <p>
+      <strong>Dirección: </strong>
+      <span th:text="${hotel.direccion}">Dirección</span>
+    </p>
+
+    <p>
+      <strong>Categoría: </strong>
+      <span th:each="star : ${#numbers.sequence(1, hotel.estrellas)}">
+                <i class="fas fa-star"></i>
+            </span>
+    </p>
+
+    <p>
+      <strong>Precio por noche: </strong>
+      <span th:text="'$' + ${hotel.precio}">Precio</span>
+    </p>
+
+    <p>
+      <strong>Contacto: </strong>
+    </p>
+    <p style="margin-left: 20px;">
+      <i class="fas fa-envelope"></i>
+      <span th:text="${hotel.email}">Email</span>
+    </p>
+    <p style="margin-left: 20px;">
+      <i class="fas fa-phone"></i>
+      <span th:text="${hotel.telefono}">Teléfono</span>
+    </p>
+  </div>
+</div>
+</body>
+</html>

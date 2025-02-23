@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Listado de Puntos de Interés</title>
+  <link rel="stylesheet" href="/listado.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+<h1>Puntos de Interés Disponibles</h1>
+
+<div class="poi-container">
+  <div th:each="poi : ${pois}" class="poi-card" th:data-poi-id="${poi._id}">
+    <img th:src="@{${poi.imagen}}" alt="Imagen del punto de interés">
+    <div class="poi-info">
+      <h2 th:text="${poi.nombre}">Nombre POI</h2>
+      <p>
+        <i class="fas fa-map-marker-alt"></i>
+        <span th:text="${poi.ciudad}">Ciudad</span>
+      </p>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const poiCards = document.querySelectorAll('.poi-card');
+    poiCards.forEach(card => {
+      card.addEventListener('click', function() {
+        const poiID = this.getAttribute('data-poi-id');
+        window.location.href = '/web/poi/' + poiID;
+      });
+    });
+  });
+</script>
+</body>
+</html>

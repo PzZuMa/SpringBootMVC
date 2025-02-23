@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title th:text="${poi.nombre}">Detalle del Punto de Interés</title>
+  <link rel="stylesheet" href="/detalle.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+<div class="poi-detail">
+  <img th:src="@{${poi.imagen}}" alt="Imagen del punto de interés">
+  <div class="poi-detail-info">
+    <div class="header-container">
+      <h1 th:text="${poi.nombre}">Nombre del POI</h1>
+      <p class="city-text" th:text="${poi.ciudad}">Ciudad</p>
+    </div>
+
+    <p>
+      <strong>Tipo: </strong>
+      <span th:text="${poi.tipo}">Tipo de atracción</span>
+    </p>
+
+    <p>
+      <strong>Horario de apertura: </strong>
+      <i class="fas fa-clock"></i>
+      <span th:text="${poi.horario_apertura}">Horario</span>
+    </p>
+
+    <p>
+      <strong>Precio de entrada: </strong>
+      <span th:text="'€' + ${#numbers.formatDecimal(poi.precio, 1, 2)}">Precio</span>
+    </p>
+  </div>
+</div>
+</body>
+</html>
