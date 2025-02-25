@@ -37,7 +37,6 @@ body {
 }
 
 /* Estilos específicos Hotel */
-
 .header-container {
     display: flex;
     align-items: center;
@@ -74,28 +73,6 @@ body {
 }
 
 /* Estilos específicos POI */
-
-.header-container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 20px;
-}
-
-.header-container h1 {
-    margin: 0;
-    text-align: left;
-    font-size: 2em;
-}
-
-.city-text {
-    font-weight: bold;
-    font-size: 1.2em;
-    color: #555;
-    margin: 0;
-    padding-left: 20px;
-}
-
 .poi-detail-info i.fas {
     margin-right: 10px;
     color: #555;
@@ -110,7 +87,6 @@ body {
 }
 
 /* Estilos específicos Vuelo */
-
 .route-text {
     font-size: 1.3em;
     color: #2c3e50;

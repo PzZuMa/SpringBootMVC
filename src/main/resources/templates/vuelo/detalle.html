@@ -36,5 +36,15 @@
     </p>
   </div>
 </div>
+<div class="buttons-container">
+  <a th:href="@{/web/vuelo/{id}/editar(id=${vuelo._id})}" class="btn btn-primary">✏️ Editar</a>
+
+  <form th:action="@{/web/vuelo/{id}/eliminar(id=${vuelo._id})}" method="post"
+        onsubmit="return confirm('¿Estás seguro de que deseas eliminar este vuelo?');" class="delete-form">
+    <button type="submit" class="btn btn-delete">🗑️ Eliminar</button>
+  </form>
+
+  <a href="/web/vuelo/lista" class="btn btn-back">⬅️ Volver</a>
+</div>
 </body>
 </html>

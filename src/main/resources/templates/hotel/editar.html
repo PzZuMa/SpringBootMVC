@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Editar Hotel</title>
+  <link rel="stylesheet" href="/editar.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<h1>Editar Hotel</h1>
+
+<form th:action="@{/web/hotel/{id}/editar(id=${hotel._id})}" method="post" enctype="multipart/form-data">
+  <label>Nombre:</label>
+  <input type="text" name="nombre" th:value="${hotel.nombre}" required>
+
+  <label>Ciudad:</label>
+  <input type="text" name="ciudad" th:value="${hotel.ciudad}" required>
+
+  <label>Dirección:</label>
+  <input type="text" name="direccion" th:value="${hotel.direccion}" required>
+
+  <label>Estrellas:</label>
+  <input type="number" name="estrellas" th:value="${hotel.estrellas}" min="1" max="5" required>
+
+  <label>Precio:</label>
+  <input type="number" name="precio" th:value="${hotel.precio}" step="0.01" required>
+
+  <label>Email:</label>
+  <input type="email" name="email" th:value="${hotel.email}" required>
+
+  <label>Teléfono:</label>
+  <input type="text" name="telefono" th:value="${hotel.telefono}" required>
+
+  <div class="form-buttons">
+    <button type="submit" class="btn btn-save"><i class="fas fa-save"></i> Guardar</button>
+    <a th:href="@{/web/hotel/{id}(id=${hotel._id})}" class="btn btn-cancel"><i class="fas fa-times"></i> Cancelar</a>
+  </div>
+</form>
+
+</body>
+</html>

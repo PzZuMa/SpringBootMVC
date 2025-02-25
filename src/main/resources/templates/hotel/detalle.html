@@ -45,5 +45,15 @@
     </p>
   </div>
 </div>
+<div class="buttons-container">
+  <a th:href="@{/web/hotel/{id}/editar(id=${hotel._id})}" class="btn btn-primary">✏️ Editar</a>
+
+  <form th:action="@{/web/hotel/{id}/eliminar(id=${hotel._id})}" method="post"
+        onsubmit="return confirm('¿Estás seguro de que deseas eliminar este hotel?');" class="delete-form">
+    <button type="submit" class="btn btn-delete">🗑️ Eliminar</button>
+  </form>
+
+  <a href="/web/hotel/lista" class="btn btn-back">⬅️ Volver</a>
+</div>
 </body>
 </html>

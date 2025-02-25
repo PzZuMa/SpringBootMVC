@@ -32,5 +32,15 @@
     </p>
   </div>
 </div>
+<div class="buttons-container">
+  <a th:href="@{/web/poi/{id}/editar(id=${poi._id})}" class="btn btn-primary">✏️ Editar</a>
+
+  <form th:action="@{/web/poi/{id}/eliminar(id=${poi._id})}" method="post"
+        onsubmit="return confirm('¿Estás seguro de que deseas eliminar este punto de interés?');" class="delete-form">
+    <button type="submit" class="btn btn-delete">🗑️ Eliminar</button>
+  </form>
+
+  <a href="/web/poi/lista" class="btn btn-back">⬅️ Volver</a>
+</div>
 </body>
 </html>

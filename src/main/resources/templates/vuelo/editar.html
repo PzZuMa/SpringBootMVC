@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Vuelo</title>
+    <link rel="stylesheet" href="/editar.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<h1>Editar Vuelo</h1>
+
+<form th:action="@{/web/vuelo/{id}/editar(id=${vuelo._id})}" method="post" enctype="multipart/form-data">
+    <label>Código:</label>
+    <input type="text" name="codigo" th:value="${vuelo.codigo}" required>
+
+    <label>Aerolínea:</label>
+    <input type="text" name="aerolinea" th:value="${vuelo.aerolinea}" required>
+
+    <label>Origen:</label>
+    <input type="text" name="origen" th:value="${vuelo.origen}" required>
+
+    <label>Destino:</label>
+    <input type="text" name="destino" th:value="${vuelo.destino}" required>
+
+    <label>Fecha de Salida:</label>
+    <input type="text" name="fecha_salida" th:value="${vuelo.fecha_salida}" required>
+
+    <label>Hora de Salida:</label>
+    <input type="text" name="hora_salida" th:value="${vuelo.hora_salida}" required>
+
+    <label>Duración (minutos):</label>
+    <input type="number" name="duracion" th:value="${vuelo.duracion}" required>
+
+    <div class="form-buttons">
+        <button type="submit" class="btn btn-save"><i class="fas fa-save"></i> Guardar</button>
+        <a th:href="@{/web/vuelo/{id}(id=${vuelo._id})}" class="btn btn-cancel"><i class="fas fa-times"></i> Cancelar</a>
+    </div>
+</form>
+
+</body>
+</html>
