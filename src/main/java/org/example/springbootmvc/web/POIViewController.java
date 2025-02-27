@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
+
 
 @Controller
 @RequestMapping("/web/poi")
@@ -80,6 +80,27 @@ public class POIViewController {
         }
 
         poiRepository.deleteById(id);
+        return "redirect:/web/poi/lista";
+    }
+
+    @GetMapping("/nuevo")
+    public String nuevoPOI(HttpSession session, Model model) {
+        if (session.getAttribute("user") == null) {
+            return "redirect:/web/login";
+        }
+
+        POI poi = new POI();
+        model.addAttribute("poi", poi);
+        return "poi/nuevo";
+    }
+
+    @PostMapping("/nuevo")
+    public String guardarNuevoPOI(HttpSession session, @ModelAttribute POI poi) {
+        if (session.getAttribute("user") == null) {
+            return "redirect:/web/login";
+        }
+
+        poiRepository.save(poi);
         return "redirect:/web/poi/lista";
     }
 }

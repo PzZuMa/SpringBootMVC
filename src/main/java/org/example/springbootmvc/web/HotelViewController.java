@@ -84,4 +84,25 @@ public class HotelViewController {
         hotelRepository.deleteById(id);
         return "redirect:/web/hotel/lista";
     }
+
+    @GetMapping("/nuevo")
+    public String nuevoHotel(HttpSession session, Model model) {
+        if (session.getAttribute("user") == null) {
+            return "redirect:/web/login";
+        }
+
+        Hotel hotel = new Hotel();
+        model.addAttribute("hotel", hotel);
+        return "hotel/nuevo";
+    }
+
+    @PostMapping("/nuevo")
+    public String guardarNuevoHotel(HttpSession session, @ModelAttribute Hotel hotel) {
+        if (session.getAttribute("user") == null) {
+            return "redirect:/web/login";
+        }
+
+        hotelRepository.save(hotel);
+        return "redirect:/web/hotel/lista";
+    }
 }

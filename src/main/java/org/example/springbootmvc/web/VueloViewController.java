@@ -1,6 +1,7 @@
 package org.example.springbootmvc.web;
 
 import jakarta.servlet.http.HttpSession;
+import org.example.springbootmvc.models.Hotel;
 import org.example.springbootmvc.models.Vuelo;
 import org.example.springbootmvc.repositories.VuelosRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -82,6 +83,28 @@ public class VueloViewController {
         }
 
         vueloRepository.deleteById(id);
+        return "redirect:/web/vuelo/lista";
+    }
+
+    @GetMapping("/nuevo")
+    public String nuevoVuelo(HttpSession session, Model model) {
+        if (session.getAttribute("user") == null) {
+            return "redirect:/web/login";
+        }
+
+        // Crear un hotel vacío para el formulario
+        Vuelo vuelo = new Vuelo();
+        model.addAttribute("vuelo", vuelo);
+        return "vuelo/nuevo";
+    }
+
+    @PostMapping("/nuevo")
+    public String guardarNuevoVuelo(HttpSession session, @ModelAttribute Vuelo vuelo) {
+        if (session.getAttribute("user") == null) {
+            return "redirect:/web/login";
+        }
+
+        vueloRepository.save(vuelo);
         return "redirect:/web/vuelo/lista";
     }
 }

@@ -1,50 +1,181 @@
+<!-- Detalle de Vuelo -->
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <title th:text="${vuelo.codigo}">Detalle del Vuelo</title>
-  <link rel="stylesheet" href="/detalle.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #e4e4e4;
+    }
+
+    .header-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px;
+      background-color: #fff;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .header-container h1 {
+      margin: 0;
+      color: #333;
+      font-size: 2em;
+    }
+
+    .buttons-container {
+      display: flex;
+      gap: 15px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+      cursor: pointer;
+      text-decoration: none;
+      text-align: center;
+      transition: background-color 0.2s, transform 0.2s;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+    }
+
+    .btn-back {
+      background-color: #e74c3c;
+      color: white;
+    }
+
+    .btn-back:hover {
+      background-color: #c0392b;
+    }
+
+    .btn-primary {
+      background-color: #4a90e2;
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background-color: #357abd;
+    }
+
+    .btn-delete {
+      background-color: #e74c3c;
+      color: white;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.2s, transform 0.2s;
+    }
+
+    .btn-delete:hover {
+      background-color: #c0392b;
+      transform: translateY(-3px);
+    }
+
+    .flight-detail {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: flex;
+      background-color: #fff;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .hotel-detail img {
+      width: 500px;
+      height: 400px;
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+
+    .flight-detail-info {
+      padding: 20px;
+      width: 50%;
+    }
+
+    .hotel-info-header h2 {
+      margin: 0 0 10px 0;
+      color: #333;
+    }
+
+    .city-text {
+      color: #666;
+      margin-top: 5px;
+    }
+
+    .fa-star {
+      color: gold;
+    }
+
+    .delete-form {
+      margin: 0;
+    }
+
+    @media (max-width: 768px) {
+      .header-container {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .buttons-container {
+        flex-direction: column;
+        width: 100%;
+        align-items: center;
+      }
+
+      .btn, .btn-delete {
+        width: 80%;
+      }
+
+      .flight-detail {
+        flex-direction: column;
+      }
+
+      .hotel-detail img,
+      .flight-detail-info {
+        width: 100%;
+      }
+    }
+  </style>
 </head>
 <body>
+<div class="header-container">
+  <h1 th:text="${vuelo.codigo}">DETALLE DEL VUELO</h1>
+  <div class="buttons-container">
+    <a th:href="@{/web/vuelo/{id}/editar(id=${vuelo._id})}" class="btn btn-primary"><i class="fas fa-edit"></i> Editar</a>
+    <form th:action="@{/web/vuelo/{id}/eliminar(id=${vuelo._id})}" method="post" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este vuelo?');" class="delete-form">
+      <button type="submit" class="btn-delete"><i class="fas fa-trash"></i> Eliminar</button>
+    </form>
+    <a href="/web/vuelo/lista" class="btn btn-back"><i class="fas fa-arrow-left"></i> Volver</a>
+  </div>
+</div>
+
 <div class="flight-detail">
   <img th:src="@{${vuelo.imagen}}" alt="Imagen de la aerolínea">
   <div class="flight-detail-info">
-    <div class="header-container">
-      <h1 th:text="${vuelo.codigo}">Código de vuelo</h1>
-      <p class="route-text">
-        <span th:text="${vuelo.origen}">Origen</span>
-        <i class="fas fa-arrow-right"></i>
-        <span th:text="${vuelo.destino}">Destino</span>
-      </p>
+    <div class="poi-info-header">
+      <h2 th:text="${vuelo.codigo}">Nombre del POI</h2>
+      <p class="city-text" th:text="${vuelo.origen}">Origen</p>
+      <p class="city-text" th:text="${vuelo.destino}">Destino</p>
     </div>
 
-    <p>
-      <strong>Aerolínea: </strong>
-      <i class="fas fa-plane"></i>
-      <span th:text="${vuelo.aerolinea}">Nombre aerolínea</span>
-    </p>
-
-    <p>
-      <strong>Salida: </strong>
-      <span th:text="${vuelo.fecha_salida} + ' ' + ${vuelo.hora_salida}">Fecha y hora</span>
-    </p>
-
-    <p>
-      <strong>Duración: </strong>
-      <span th:text="${vuelo.duracion} + ' minutos'">Duración</span>
-    </p>
+    <p><strong>Aerolínea: </strong><span th:text="${vuelo.aerolinea}">Nombre aerolínea</span></p>
+    <p><strong>Salida: </strong><span th:text="${vuelo.fecha_salida} + ' ' + ${vuelo.hora_salida}">Fecha y hora</span></p>
+    <p><strong>Duración: </strong><span th:text="${vuelo.duracion} + ' minutos'">Duración</span></p>
   </div>
-</div>
-<div class="buttons-container">
-  <a th:href="@{/web/vuelo/{id}/editar(id=${vuelo._id})}" class="btn btn-primary">✏️ Editar</a>
-
-  <form th:action="@{/web/vuelo/{id}/eliminar(id=${vuelo._id})}" method="post"
-        onsubmit="return confirm('¿Estás seguro de que deseas eliminar este vuelo?');" class="delete-form">
-    <button type="submit" class="btn btn-delete">🗑️ Eliminar</button>
-  </form>
-
-  <a href="/web/vuelo/lista" class="btn btn-back">⬅️ Volver</a>
 </div>
 </body>
 </html>

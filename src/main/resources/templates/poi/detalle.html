@@ -1,46 +1,179 @@
+<!-- Detalle de POI -->
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <title th:text="${poi.nombre}">Detalle del Punto de Interés</title>
-  <link rel="stylesheet" href="/detalle.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #e4e4e4;
+    }
+
+    .header-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px;
+      background-color: #fff;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .header-container h1 {
+      margin: 0;
+      color: #333;
+      font-size: 2em;
+    }
+
+    .buttons-container {
+      display: flex;
+      gap: 15px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+      cursor: pointer;
+      text-decoration: none;
+      text-align: center;
+      transition: background-color 0.2s, transform 0.2s;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+    }
+
+    .btn-back {
+      background-color: #e74c3c;
+      color: white;
+    }
+
+    .btn-back:hover {
+      background-color: #c0392b;
+    }
+
+    .btn-primary {
+      background-color: #4a90e2;
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background-color: #357abd;
+    }
+
+    .btn-delete {
+      background-color: #e74c3c;
+      color: white;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.2s, transform 0.2s;
+    }
+
+    .btn-delete:hover {
+      background-color: #c0392b;
+      transform: translateY(-3px);
+    }
+
+    .poi-detail {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: flex;
+      background-color: #fff;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .poi-detail img {
+      width: 500px;
+      height: 400px;
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+
+    .poi-detail-info {
+      padding: 20px;
+      width: 50%;
+    }
+
+    .hotel-info-header h2 {
+      margin: 0 0 10px 0;
+      color: #333;
+    }
+
+    .city-text {
+      color: #666;
+      margin-top: 5px;
+    }
+
+    .fa-star {
+      color: gold;
+    }
+
+    .delete-form {
+      margin: 0;
+    }
+
+    @media (max-width: 768px) {
+      .header-container {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .buttons-container {
+        flex-direction: column;
+        width: 100%;
+        align-items: center;
+      }
+
+      .btn, .btn-delete {
+        width: 80%;
+      }
+
+      .poi-detail {
+        flex-direction: column;
+      }
+
+      .hotel-detail img,
+      .poi-detail-info {
+        width: 100%;
+      }
+    }
+  </style>
 </head>
 <body>
+<div class="header-container">
+  <h1 th:text="${poi.nombre}">DETALLE DEL PUNTO DE INTERÉS</h1>
+  <div class="buttons-container">
+    <a th:href="@{/web/poi/{id}/editar(id=${poi._id})}" class="btn btn-primary"><i class="fas fa-edit"></i> Editar</a>
+    <form th:action="@{/web/poi/{id}/eliminar(id=${poi._id})}" method="post" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este punto de interés?');" class="delete-form">
+      <button type="submit" class="btn-delete"><i class="fas fa-trash"></i> Eliminar</button>
+    </form>
+    <a href="/web/poi/lista" class="btn btn-back"><i class="fas fa-arrow-left"></i> Volver</a>
+  </div>
+</div>
+
 <div class="poi-detail">
   <img th:src="@{${poi.imagen}}" alt="Imagen del punto de interés">
   <div class="poi-detail-info">
-    <div class="header-container">
-      <h1 th:text="${poi.nombre}">Nombre del POI</h1>
+    <div class="poi-info-header">
+      <h2 th:text="${poi.nombre}">Nombre del POI</h2>
       <p class="city-text" th:text="${poi.ciudad}">Ciudad</p>
     </div>
-
-    <p>
-      <strong>Tipo: </strong>
-      <span th:text="${poi.tipo}">Tipo de atracción</span>
-    </p>
-
-    <p>
-      <strong>Horario de apertura: </strong>
-      <i class="fas fa-clock"></i>
-      <span th:text="${poi.horario_apertura}">Horario</span>
-    </p>
-
-    <p>
-      <strong>Precio de entrada: </strong>
-      <span th:text="'€' + ${#numbers.formatDecimal(poi.precio, 1, 2)}">Precio</span>
-    </p>
+    <p><strong>Tipo: </strong><span th:text="${poi.tipo}">Tipo de atracción</span></p>
+    <p><strong>Horario de apertura: </strong><span th:text="${poi.horario_apertura}">Horario</span></p>
+    <p><strong>Precio de entrada: </strong><span th:text="'€' + ${#numbers.formatDecimal(poi.precio, 1, 2)}">Precio</span></p>
   </div>
-</div>
-<div class="buttons-container">
-  <a th:href="@{/web/poi/{id}/editar(id=${poi._id})}" class="btn btn-primary">✏️ Editar</a>
-
-  <form th:action="@{/web/poi/{id}/eliminar(id=${poi._id})}" method="post"
-        onsubmit="return confirm('¿Estás seguro de que deseas eliminar este punto de interés?');" class="delete-form">
-    <button type="submit" class="btn btn-delete">🗑️ Eliminar</button>
-  </form>
-
-  <a href="/web/poi/lista" class="btn btn-back">⬅️ Volver</a>
 </div>
 </body>
 </html>
