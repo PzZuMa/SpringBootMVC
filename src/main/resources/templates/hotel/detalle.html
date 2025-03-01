@@ -106,14 +106,22 @@
       width: 50%;
     }
 
+    .hotel-info-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
     .hotel-info-header h2 {
-      margin: 0 0 10px 0;
+      margin: 0;
       color: #333;
     }
 
     .city-text {
       color: #666;
-      margin-top: 5px;
+      font-weight: bold;
+      text-align: right;
     }
 
     .fa-star {
@@ -147,6 +155,16 @@
       .hotel-detail img,
       .hotel-detail-info {
         width: 100%;
+      }
+
+      .hotel-info-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .city-text {
+        text-align: left;
+        margin-top: 5px;
       }
     }
   </style>

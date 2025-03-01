@@ -106,18 +106,22 @@
       width: 50%;
     }
 
-    .hotel-info-header h2 {
-      margin: 0 0 10px 0;
+    .poi-info-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    .poi-info-header h2 {
+      margin: 0;
       color: #333;
     }
 
     .city-text {
       color: #666;
-      margin-top: 5px;
-    }
-
-    .fa-star {
-      color: gold;
+      font-weight: bold;
+      text-align: right;
     }
 
     .delete-form {
@@ -144,9 +148,19 @@
         flex-direction: column;
       }
 
-      .hotel-detail img,
+      .poi-detail img,
       .poi-detail-info {
         width: 100%;
+      }
+
+      .poi-info-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .city-text {
+        text-align: left;
+        margin-top: 5px;
       }
     }
   </style>
